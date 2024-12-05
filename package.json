@@ -1,0 +1,16 @@
+{
+  "name": "storygraph-api",
+  "version": "1.0.0",
+  "description": "A set of Netlify Functions that web scrape public StoryGraph profiles to make a low-fidelity API.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Henry From Online <yo@henry.codes>",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "happy-dom": "^15.11.7"
+  },
+}
