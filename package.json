@@ -12,5 +12,5 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "happy-dom": "^15.11.7"
-  },
+  }
 }
