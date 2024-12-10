@@ -15,6 +15,7 @@ export const handler = async (req) => {
         const responseBooksRead = await fetch(
           `${process.env.URL}/.netlify/functions/getList?target=books-read&username=${username}`
         ,{ signal: AbortSignal.timeout(26000) });
+        
     const recentReading = await responseBooksRead.json();
     const currentlyReading = await responseCurrentlyReading.json();
     const toRead = await responseToRead.json();

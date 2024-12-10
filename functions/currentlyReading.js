@@ -4,10 +4,11 @@ const USERNAME = process.env.USERNAME;
 
 export const handler = async (req) => {
   const username = req.queryStringParameters?.username || USERNAME;
+  const limit = req.queryStringParameters?.limit;
 
   try {
     const responseCurrentlyReading = await fetch(
-      `${process.env.URL}/.netlify/functions/getList?target=currently-reading&username=${username}`,
+      `${process.env.URL}/.netlify/functions/getList?target=currently-reading&username=${username}${limit ? `&limit=${limit}` : ''}`,
       { signal: AbortSignal.timeout(26000) }
     );
 
