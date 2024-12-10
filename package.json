@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A set of Netlify Functions that web scrape public StoryGraph profiles to make a low-fidelity API.",
   "scripts": {
+    "start": "netlify dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,5 +13,8 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "happy-dom": "^15.11.7"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.38.0"
   }
 }
