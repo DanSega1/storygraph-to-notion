@@ -23,9 +23,13 @@ export default parseBookPane = (bookPane) => {
   data.title = bookPane.querySelector(
     '.book-title-author-and-series a[href^="/books/"]'
   ).textContent;
-  data.author = bookPane.querySelector(
+  
+  const author = bookPane.querySelector(
     '.book-title-author-and-series a[href^="/authors/"]'
-  ).textContent;
+  )?.textContent;
+  if (author) {
+    data.author = author;
+  }
 
   // genreTags and moodTags uses a Set to deduplicate repeated tags.
   const genreTags = [
@@ -57,7 +61,6 @@ export default parseBookPane = (bookPane) => {
   const pageCount = [...bookPane.querySelectorAll("p")].find((tag) =>
     tag.textContent.trim().toLowerCase().includes("pages")
   )?.textContent;
-
   if (pageCount) {
     data.pageCount = parseInt(pageCount);
   }
@@ -70,7 +73,7 @@ export default parseBookPane = (bookPane) => {
   }
 
   const review = bookPane.querySelector('a[href^="/reviews/"]')
-    ?.previousElementSibling.textContent;
+    ?.previousElementSibling?.textContent;
   if (review) {
     data.review = parseFloat(review);
   }
