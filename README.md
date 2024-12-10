@@ -39,6 +39,25 @@ Returns an object `{recentReading, currentlyReading, toRead}` with as many books
 > [!WARNING]
 > For large profiles, this straight up will just fail. It requires making requests to all three endpoints, which then requires making multiple requests to each endpoint to paginate through the results. If all of these requests aren't completed in 30s total, the call will fail. You’re probably better off making your own individual calls to each list endpoint, so each one can take 30s.
 
+## 📕 Example Response
+
+The API tries to return as much information as it can from each book, and if a field isn't found, nothing is returned.
+
+```json
+{
+  "id": "f3158a48-cb26-4887-a8df-9b8cae6cc377",
+  "bookCoverStoryGraphUrl": "https://cdn.thestorygraph.com/z1l5ydkwerochy5ldh0w07ysm24h",
+  "title": "Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values",
+  "author": "Robert M. Pirsig",
+  "genreTags": ["fiction", "classics", "philosophy"],
+  "moodTags": ["challenging", "informative", "reflective", "slow-paced"],
+  "pageCount": 540,
+  "firstPublished": 1974
+}
+```
+
+More information can be found [in the JSDoc for book parsing](https://github.com/xdesro/storygraph-api/blob/main/utils/parseBookPane.js#L1C1-L15C4).
+
 ## 🚧 Local Development
 
 WIP lol. I use [Netlify CLI](https://github.com/netlify/cli) and Postman calls to `http://localhost:8888/.netlify/functions/${endpoint}` to test the functions locally. Your mileage may vary!
