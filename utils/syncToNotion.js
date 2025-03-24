@@ -1,5 +1,5 @@
-const { Client } = require('@notionhq/client');
-const { scrapeStoryGraphList } = require('./scrapeStoryGraph');
+import { Client } from '@notionhq/client';
+import { scrapeStoryGraphList } from './scrapeStoryGraph.js';
 
 // Initialize Notion client
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -147,8 +147,8 @@ async function syncAllToNotion() {
 }
 
 // Execute the sync if this file is run directly
-if (require.main === module) {
+if (import.meta.url === new URL(import.meta.url).href) {
   syncAllToNotion();
 }
 
-module.exports = { syncAllToNotion, addBookToNotion };
+export { syncAllToNotion, addBookToNotion };
