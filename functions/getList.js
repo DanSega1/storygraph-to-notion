@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import { Window } from "happy-dom";
-import parseBookPane from "../utils/parseBookPane";
+import parseBookPane from "../utils/parseBookPane.js";
 
 const USERNAME = process.env.USERNAME;
 
