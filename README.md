@@ -83,11 +83,11 @@ This project is automatically built and deployed using GitHub Actions.
 The GitHub Actions workflow automatically:
 
 1. Runs on every push to the main branch and on pull requests
-2. Sets up Node.js environment
-3. Installs dependencies
-4. Builds the project
-5. Runs tests
-6. Deploys to GitHub Pages (only on push to main)
+2. Runs daily at 9:00 AM UTC to ensure data is kept up-to-date
+3. Sets up Node.js environment
+4. Installs dependencies
+5. Builds the project
+6. Deploys to GitHub Pages (only on push to main or scheduled runs)
 
 You can see the workflow configuration in `.github/workflows/main.yml`.
 

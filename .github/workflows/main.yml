@@ -1,13 +1,16 @@
-name: Build and Deploy
+name: Deploy Functions
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    # Runs at 9:00 AM UTC every day
+    - cron: '0 9 * * *'
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     
     steps:
@@ -20,22 +23,26 @@ jobs:
         cache: 'npm'
     
     - name: Install dependencies
-      run: npm ci
+      run: npm ci || npm install
+      
+    - name: Create production build directory
+      run: mkdir -p dist/api
     
-    - name: Build
-      run: npm run build
-      
-    - name: Test
-      run: npm test
-      
+    - name: Copy function files
+      run: |
+        cp -r functions/* dist/api/
+        cp package.json dist/
+        cp -r utils dist/api/
+        cp -r node_modules dist/
+    
     - name: Deploy
       if: github.ref == 'refs/heads/main'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        folder: dist # Adjust this to your build output folder
+        folder: dist
         branch: gh-pages
         token: ${{ secrets.GITHUB_TOKEN }}
       
-    # Add any additional environment variables needed
     env:
       CI: true
+      USERNAME: ${{ secrets.USERNAME }}
