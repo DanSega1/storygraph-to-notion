@@ -28,6 +28,9 @@ jobs:
     - name: Install Notion SDK
       run: npm install @notionhq/client
       
+    - name: Print directory structure for debugging
+      run: find . -type f -not -path "*/node_modules/*" -not -path "*/.git/*" | sort
+      
     - name: Sync data to Notion
       if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
       run: node utils/syncToNotion.js
@@ -36,9 +39,9 @@ jobs:
         NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
         NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         NODE_OPTIONS: --experimental-modules
-      
+
     - name: Create production build directory
-      run: mkdir -p dist/api
+      run: mkdir -p dist/api/
     
     - name: Copy function files
       run: |
@@ -54,7 +57,6 @@ jobs:
         folder: dist
         branch: gh-pages
         token: ${{ secrets.GITHUB_TOKEN }}
-      
-    env:
-      CI: true
-      USERNAME: ${{ secrets.USERNAME }}
+      env:
+        CI: true
+        USERNAME: ${{ secrets.USERNAME }}

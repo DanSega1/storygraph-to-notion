@@ -1,5 +1,8 @@
 import { Client } from '@notionhq/client';
-import { scrapeStoryGraphList } from './scrapeStoryGraph.js';
+
+// In the original repo, this file might have a different name or path
+// Let's try to find the right module by importing it differently
+import * as scraper from '../functions/getList.js';
 
 // Initialize Notion client
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
@@ -120,6 +123,29 @@ function listTypeToStatus(listType) {
 }
 
 /**
+ * Scrapes StoryGraph list using the getList function
+ */
+async function scrapeStoryGraphList({ target, username, limit }) {
+  try {
+    // This is a workaround since we can't directly import scrapeStoryGraph
+    // We're using the getList function directly from the functions directory
+    const result = await scraper.handler({
+      queryStringParameters: {
+        target,
+        username,
+        limit
+      }
+    });
+    
+    // The handler returns a response object, we need to parse the body
+    return JSON.parse(result.body);
+  } catch (error) {
+    console.error(`Error scraping list ${target}:`, error);
+    return [];
+  }
+}
+
+/**
  * Syncs all StoryGraph lists to Notion
  */
 async function syncAllToNotion() {
@@ -147,7 +173,7 @@ async function syncAllToNotion() {
 }
 
 // Execute the sync if this file is run directly
-if (import.meta.url === new URL(import.meta.url).href) {
+if (import.meta.url === import.meta.url) {
   syncAllToNotion();
 }
 
