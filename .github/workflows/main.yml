@@ -25,6 +25,17 @@ jobs:
     - name: Install dependencies
       run: npm ci || npm install
       
+    - name: Install Notion SDK
+      run: npm install @notionhq/client
+      
+    - name: Sync data to Notion
+      if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
+      run: node utils/syncToNotion.js
+      env:
+        USERNAME: ${{ secrets.USERNAME }}
+        NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+        NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      
     - name: Create production build directory
       run: mkdir -p dist/api
     
