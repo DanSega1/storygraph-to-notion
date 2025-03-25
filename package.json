@@ -1,20 +1,32 @@
 {
   "name": "storygraph-api",
   "version": "1.0.0",
-  "description": "A set of Netlify Functions that web scrape public StoryGraph profiles to make a low-fidelity API.",
+  "description": "API for creating and managing story graphs",
+  "main": "src/server.js",
   "scripts": {
-    "start": "netlify dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "mocha tests/**/*.test.js",
+    "test:watch": "mocha tests/**/*.test.js --watch"
   },
   "keywords": [],
   "author": "Henry From Online <yo@henry.codes>",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "happy-dom": "^15.11.7"
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "body-parser": "^1.20.2",
+    "jsonwebtoken": "^9.0.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
-    "netlify-cli": "^17.38.0"
+    "nodemon": "^3.0.1",
+    "jest": "^29.6.4",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "sinon": "^15.0.3"
   }
 }
