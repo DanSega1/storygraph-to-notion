@@ -7,7 +7,7 @@ on:
     branches: [ main ]
   schedule:
     # Runs at 9:00 AM UTC every day
-    - cron: '0 9 * * *'
+    #  - cron: '0 9 * * *'
 
 jobs:
   deploy:
