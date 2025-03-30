@@ -3,7 +3,7 @@ name: Update Notion Database
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'  # Run every day at 8am UTC
+    # - cron: '0 8 * * *'  # Run every day at 8am UTC
 
 jobs:
   update-notion:
